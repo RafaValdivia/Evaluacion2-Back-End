@@ -4,196 +4,408 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gamershop | Tienda de Videojuegos</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
-    <!-- Iconos de Bootstrap -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://googleapis.com" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
+        /* ======= VARIABLES ======= */
         :root {
-            --neon-cyan: #00f0ff;
-            --neon-pink: #ff007f;
-            --bg-dark: #0a0612;
-            --card-bg: rgba(22, 15, 38, 0.7);
+            --neon-cyan:  #00f0ff;
+            --neon-pink:  #ff007f;
+            --bg-dark:    #0a0612;
+            --card-bg:    rgba(22, 15, 38, 0.85);
         }
+
+        /* ======= RESET / BASE ======= */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 0, 127, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 40%);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(255,0,127,.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0,240,255,.12) 0%, transparent 40%);
             color: #f8f9fa;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.15rem;
+            font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+            font-size: 1.1rem;
             min-height: 100vh;
         }
 
-        .game-title-font { font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
+        /* ======= TIPOGRAFÍA ======= */
+        .font-orbitron { font-family: 'Orbitron', 'Arial Black', sans-serif; letter-spacing: 1px; }
 
-        .navbar-custom {
-            background: rgba(10, 6, 18, 0.85);
+        /* ======= NAVBAR ======= */
+        .navbar-gamer {
+            background: rgba(10, 6, 18, 0.92);
             backdrop-filter: blur(12px);
             border-bottom: 2px solid var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+            box-shadow: 0 0 20px rgba(0,240,255,.25);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
         }
 
-        /* TÍTULO PRINCIPAL MONUMENTAL */
+        .navbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .brand-logo {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Orbitron', 'Arial Black', sans-serif;
             font-weight: 900;
-            font-size: 3.8rem !important;
-            color: var(--neon-cyan) !important;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.9), 
-                         0 0 25px rgba(0, 240, 255, 0.6), 
-                         0 0 50px rgba(0, 240, 255, 0.3);
-            letter-spacing: 5px;
-            transition: all 0.4s ease;
+            font-size: 2.2rem;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            text-shadow:
+                0 0 10px rgba(0,240,255,.9),
+                0 0 25px rgba(0,240,255,.5);
+            letter-spacing: 4px;
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            transition: all .3s ease;
         }
-
         .brand-logo:hover {
-            color: var(--neon-pink) !important;
-            text-shadow: 0 0 10px rgba(255, 0, 127, 0.9), 0 0 25px rgba(255, 0, 127, 0.6), 0 0 50px rgba(255, 0, 127, 0.3);
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px rgba(255,0,127,.9), 0 0 25px rgba(255,0,127,.5);
         }
 
-        .btn-add-game {
-            border: 2px solid var(--neon-cyan);
-            color: #fff;
+        .btn-add {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            transition: all 0.3s ease;
+            font-size: .85rem;
+            padding: .55rem 1.4rem;
+            border: 2px solid var(--neon-cyan);
+            background: transparent;
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            transition: all .3s ease;
+            cursor: pointer;
         }
-
-        .btn-add-game:hover {
-            background-color: var(--neon-cyan);
+        .btn-add:hover {
+            background: var(--neon-cyan);
             color: #0a0612;
             box-shadow: 0 0 20px var(--neon-cyan);
         }
 
+        /* ======= HEADER ======= */
+        .page-header {
+            text-align: center;
+            padding: 3rem 1.5rem 2rem;
+        }
+        .page-header h1 {
+            font-family: 'Orbitron', 'Arial Black', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            color: #fff;
+            margin-bottom: .5rem;
+        }
+        .accent-pink { color: var(--neon-pink); text-shadow: 0 0 15px rgba(255,0,127,.5); }
+        .header-divider {
+            width: 100px; height: 4px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            border-radius: 2px;
+            margin: 1rem auto;
+        }
+        .stat-badge {
+            display: inline-block;
+            background: rgba(0,240,255,.1);
+            border: 1px solid rgba(0,240,255,.3);
+            border-radius: 12px;
+            padding: .4rem 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .85rem;
+            color: var(--neon-cyan);
+            margin-top: .8rem;
+        }
+
+        /* ======= MENSAJES FLASH ======= */
+        .flash-container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 1.5rem; }
+        .flash-msg {
+            padding: .9rem 1.2rem;
+            border-radius: 10px;
+            margin-bottom: .75rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .flash-success { background: rgba(25,135,84,.2); border: 1px solid rgba(25,135,84,.5); color: #75d6a1; }
+        .flash-error   { background: rgba(220,53,69,.2);  border: 1px solid rgba(220,53,69,.5);  color: #f1aeb5; }
+        .flash-close {
+            background: none; border: none; color: inherit;
+            font-size: 1.2rem; cursor: pointer; line-height: 1;
+            padding: 0 .3rem;
+        }
+
+        /* ======= GRID DE CARDS ======= */
+        .cards-section { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* ======= CARD ======= */
         .game-card {
             background: var(--card-bg);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 20px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(0,240,255,.2);
+            border-radius: 18px;
             backdrop-filter: blur(8px);
             overflow: hidden;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
         }
-
         .game-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
+            top: 0; left: 0; right: 0; height: 4px;
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
         }
-
         .game-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-7px);
             border-color: var(--neon-pink);
-            box-shadow: 0 15px 30px rgba(255, 0, 127, 0.3);
+            box-shadow: 0 16px 32px rgba(255,0,127,.25);
+        }
+
+        .card-body {
+            padding: 1.4rem 1.4rem 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: .5rem;
         }
 
         .badge-platform {
-            background: linear-gradient(135deg, #00f0ff 0%, #0072ff 100%);
+            background: linear-gradient(135deg, #00f0ff, #0072ff);
             color: #000;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            font-size: 0.8rem;
-            padding: 6px 14px;
+            font-size: .72rem;
+            padding: .35rem .85rem;
             border-radius: 8px;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
+        .stock-info { font-size: .82rem; color: #9da8b7; text-align: right; }
+        .stock-low {
+            background: linear-gradient(135deg,#ff4444,#ff007f);
+            color: #fff;
+            font-size: .72rem;
+            padding: .2rem .55rem;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .card-title {
+            font-family: 'Orbitron', 'Arial Black', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: .5rem;
+            flex-grow: 1;
+        }
+
+        .card-desc {
+            font-size: .85rem;
+            color: #8a9bb0;
+            line-height: 1.4;
+            margin-bottom: .8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .price-section {
+            border-top: 1px solid rgba(255,255,255,.1);
+            padding-top: .8rem;
+            margin-top: auto;
+        }
+        .price-label { font-size: .75rem; color: #6c757d; display: block; margin-bottom: .15rem; letter-spacing: 1px; }
         .price-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.45rem;
             font-weight: 700;
             color: #fff;
         }
+        .price-currency { font-size: .85rem; color: #0dcaf0; font-weight: 400; margin-left: .2rem; }
 
-        .btn-action-edit {
-            border: 2px solid #ffca28; color: #ffca28;
-            font-family: 'Orbitron', sans-serif; font-weight: 700;
-            transition: all 0.3s ease;
+        /* ======= BOTONES DE ACCIÓN ======= */
+        .card-actions {
+            display: flex;
+            gap: .6rem;
+            padding: 0 1.4rem 1.4rem;
         }
 
-        .btn-action-edit:hover { background: #ffca28; color: #0a0612; box-shadow: 0 0 15px #ffca28; }
-
-        .btn-action-delete {
-            border: 2px solid #ff0055; color: #ff0055;
-            font-family: 'Orbitron', sans-serif; font-weight: 700;
-            transition: all 0.3s ease;
+        .btn-edit, .btn-delete {
+            flex: 1;
+            padding: .5rem .4rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: .72rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all .3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .3rem;
+            border: 2px solid;
         }
+        .btn-edit  { border-color: #ffca28; color: #ffca28; }
+        .btn-edit:hover  { background: #ffca28; color: #0a0612; box-shadow: 0 0 14px #ffca28; }
+        .btn-delete { border-color: #ff0055; color: #ff0055; }
+        .btn-delete:hover { background: #ff0055; color: #fff; box-shadow: 0 0 14px #ff0055; }
 
-        .btn-action-delete:hover { background: #ff0055; color: #fff; box-shadow: 0 0 15px #ff0055; }
-
-        .empty-box { background: rgba(22, 15, 38, 0.4); border: 2px dashed rgba(0, 240, 255, 0.3); border-radius: 24px; padding: 60px 40px; }
+        /* ======= ESTADO VACÍO ======= */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(22,15,38,.4);
+            border: 2px dashed rgba(0,240,255,.3);
+            border-radius: 20px;
+        }
+        .empty-state i { font-size: 4rem; color: var(--neon-pink); display: block; margin-bottom: 1rem; }
+        .empty-state h2 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #fff; margin-bottom: .8rem; }
+        .empty-state p  { color: #6c757d; margin-bottom: 1.5rem; }
+        .btn-init {
+            display: inline-flex; align-items: center; gap: .4rem;
+            padding: .6rem 1.6rem;
+            background: #0dcaf0; color: #000;
+            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: .8rem;
+            border: none; border-radius: 8px; text-decoration: none;
+            transition: all .3s ease;
+        }
+        .btn-init:hover { background: #fff; color: #000; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top py-4">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand brand-logo d-flex align-items-center" href="#">
-                <i class="bi bi-dpad-fill me-3 fs-2"></i> GAMERSHOP
+    <!-- NAVBAR -->
+    <nav class="navbar-gamer">
+        <div class="navbar-inner">
+            <a class="brand-logo" href="#">
+                <i class="bi bi-dpad-fill"></i> GAMERSHOP
             </a>
-            <div>
-                <a href="{% url 'crear_videojuego' %}" class="btn btn-add-game px-4 rounded-pill btn-md">
-                    <i class="bi bi-plus-circle-fill me-2"></i>AGREGAR JUEGO
-                </a>
-            </div>
+            <a href="{% url 'crear_videojuego' %}" class="btn-add">
+                <i class="bi bi-plus-circle-fill"></i> AGREGAR JUEGO
+            </a>
         </div>
     </nav>
 
-    <header class="container text-center pt-5 pb-4">
-        <h1 class="display-3 fw-black game-title-font text-white mb-2">
-            BÓVEDA DE <span style="color: var(--neon-pink); text-shadow: 0 0 15px rgba(255,0,127,0.5);">STOCK</span>
+    <!-- HEADER -->
+    <div class="page-header">
+        <h1 class="font-orbitron">
+            BÓVEDA DE <span class="accent-pink">STOCK</span>
         </h1>
-        <p class="lead text-muted fs-4">Administración en tiempo real de títulos y licencias activas.</p>
-        <div class="mx-auto mt-3" style="width: 100px; height: 4px; background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink)); border-radius: 2px;"></div>
-    </header>
+        <p style="color:#6c757d; font-size:1.1rem;">Administración en tiempo real de títulos y licencias activas.</p>
+        <div class="header-divider"></div>
+        {% if total_juegos > 0 %}
+        <span class="stat-badge">
+            <i class="bi bi-collection-fill"></i>
+            {{ total_juegos }} título{% if total_juegos != 1 %}s{% endif %} en catálogo
+        </span>
+        {% endif %}
+    </div>
 
-    <main class="container pb-5 mt-4">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    <!-- MENSAJES FLASH -->
+    {% if messages %}
+    <div class="flash-container">
+        {% for message in messages %}
+        <div class="flash-msg {% if message.tags == 'error' %}flash-error{% else %}flash-success{% endif %}">
+            <span>{{ message }}</span>
+            <button class="flash-close" onclick="this.parentElement.remove()">✕</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- GRID DE JUEGOS -->
+    <div class="cards-section">
+        <div class="cards-grid">
             {% for juego in juegos %}
-            <div class="col">
-                <div class="card h-100 game-card text-white shadow-lg">
-                    <div class="card-body d-flex flex-column p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="badge badge-platform text-uppercase">{{ juego.plataforma }}</span>
-                            <span class="text-muted small"><i class="bi bi-boxes me-1"></i>Stock: {{ juego.stock }}</span>
-                        </div>
-                        <h3 class="card-title h5 game-title-font fw-bold text-white mb-4 flex-grow-1">{{ juego.titulo }}</h3>
-                        <div class="mt-auto pt-3 border-top border-secondary border-opacity-25">
-                            <span class="text-muted d-block small mb-1">PRECIO BASE</span>
-                            <div class="price-tag">${{ juego.precio }} <span class="fs-6 text-info fw-normal">CLP</span></div>
-                        </div>
+            <div class="game-card">
+                <div class="card-body">
+                    <div class="card-top-row">
+                        <span class="badge-platform">{{ juego.plataforma }}</span>
+                        <span class="stock-info">
+                            <i class="bi bi-boxes"></i>
+                            {% if juego.stock == 0 %}
+                                <span class="stock-low">SIN STOCK</span>
+                            {% elif juego.stock <= 5 %}
+                                <span class="stock-low">{{ juego.stock }} uds.</span>
+                            {% else %}
+                                {{ juego.stock }} uds.
+                            {% endif %}
+                        </span>
                     </div>
-                    <div class="card-footer bg-transparent border-0 d-flex gap-2 px-4 pb-4 pt-0">
-                        <a href="{% url 'editar_videojuego' juego.id %}" class="btn btn-action-edit w-50 py-2">
-                            <i class="bi bi-pencil-square me-1"></i>Editar
-                        </a>
-                        <a href="{% url 'eliminar_videojuego' juego.id %}" class="btn btn-action-delete w-50 py-2">
-                            <i class="bi bi-trash3-fill me-1"></i>Borrar
-                        </a>
+
+                    <h3 class="card-title">{{ juego.titulo }}</h3>
+
+                    {% if juego.descripcion %}
+                    <p class="card-desc">{{ juego.descripcion }}</p>
+                    {% endif %}
+
+                    <div class="price-section">
+                        <span class="price-label">PRECIO BASE</span>
+                        <span class="price-tag">
+                            ${{ juego.precio }}<span class="price-currency">CLP</span>
+                        </span>
                     </div>
                 </div>
-            </div>
-            {% empty %}
-            <div class="col-12 text-center py-5">
-                <div class="empty-box col-md-8 col-lg-6 mx-auto shadow">
-                    <i class="bi bi-folder-symlink display-2 text-muted mb-4 d-block" style="color: var(--neon-pink) !important;"></i>
-                    <h2 class="game-title-font fw-bold h4 text-white mb-3">SISTEMA COMPILADO SIN REGISTROS</h2>
-                    <p class="text-muted px-4 mb-4">La conexión con la base de datos se completó con éxito, pero la tabla se encuentra vacía.</p>
-                    <a href="{% url 'crear_videojuego' %}" class="btn btn-sm btn-info px-4 text-dark fw-bold rounded-3 game-title-font">
-                        <i class="bi bi-plus-circle-fill me-2"></i>INICIALIZAR INVENTARIO
+
+                <div class="card-actions">
+                    <a href="{% url 'editar_videojuego' juego.pk %}" class="btn-edit">
+                        <i class="bi bi-pencil-square"></i> Editar
+                    </a>
+                    <a href="{% url 'eliminar_videojuego' juego.pk %}" class="btn-delete">
+                        <i class="bi bi-trash3-fill"></i> Borrar
                     </a>
                 </div>
             </div>
+
+            {% empty %}
+            <div class="empty-state">
+                <i class="bi bi-folder-symlink"></i>
+                <h2>SISTEMA SIN REGISTROS</h2>
+                <p>La conexión con la base de datos fue exitosa, pero la tabla está vacía.</p>
+                <a href="{% url 'crear_videojuego' %}" class="btn-init">
+                    <i class="bi bi-plus-circle-fill"></i> INICIALIZAR INVENTARIO
+                </a>
+            </div>
             {% endfor %}
         </div>
-    </main>
+    </div>
 
-    <script src="https://jsdelivr.net"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
